@@ -149,11 +149,11 @@ console.log(per.toString());
   */
  
  class Instructor extends Lambdasian {
-  constructor(object, specialty, favLanguage, catchPhrase) {
+  constructor(object) {
     super(object);
-    this.specialty = specialty;
-    this.favLanguage = favLanguage;
-    this.catchPhrase = catchPhrase;
+    this.specialty = object.specialty;
+    this.favLanguage = object.favLanguage;
+    this.catchPhrase = object.catchPhrase;
   }
   demo(subject){
     return `Today we are learning about ${subject}`;  
@@ -179,16 +179,17 @@ console.log(per.toString());
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
  class Student extends Lambdasian {
-  constructor(object, previousBackground, className) {
+  constructor(object) {
     super(object);
-    this.previousBackground = previousBackground;
-    this.className = className;
-    this.favSubjects = [];
+    this.previousBackground = object.previousBackground;
+    this.className = object.className;
+    this.favSubjects = object.favSubjects;
   }
   listSubjects() {
-    this.favSubjects.map((accumulator, item) => {
-      accumulator + ", " + item;
+    const string = this.favSubjects.reduce((accumulator, item) => {
+      return accumulator + ", " + item;
     });
+    return `Loving ${string}!`;
   }
   PRAssignment(subject) {
     return `${this.name} has submitted a PR for ${subject}`
@@ -213,9 +214,9 @@ console.log(per.toString());
   */
  class ProjectManager extends Instructor {
   constructor(object, specialty, favLanguage, catchPhrase, gradClassName, favInstructor){
-    super(object, specialty, favLanguage, catchPhrase);
-    this.gradClassName = gradClassName;
-    this.favInstructor = favInstructor;
+    super(object);
+    this.gradClassName = object.gradClassName;
+    this.favInstructor = object.favInstructor;
   }
   standUp(channel){
     return `${this.name} announces to ${channel}, @channel standy times!`;
